@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Hackbright Coffee Shop</title>
+
+    <!-- Bootstrap links -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap-theme.min.css">
+    <!-- Google fonts link -->
+    <link rel="stylesheet" href="http://fonts.googleapis.com/css?family=Raleway" >
+    <!-- Our CSS -->
+    <link rel="stylesheet" href="static/coffee.css">
+    <script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
+</head>
+<body>
+<div class="container">
+    <div class="starter-template">
+        <h1>Coffee Shop</h1>
+        <br>
+
+        <img id="coffee-image" src="LOLWUT" alt="make this image work with js" height="300" width="200">
+
+        <h3 id="message">Click The Image To Order Coffee</h3>
+
+        <table class="table">
+            <tr>
+                <td class="col-md-2">
+                    <button class="btn btn-default" id="espresso">Espresso</button>
+                </td>
+                <td class="col-md-2">
+                    <button class="btn btn-default" id="latte">Latte</button>
+                </td>
+                <td class="col-md-2">
+                    <button class="btn btn-default" id="hot-chocolate">Hot Chocolate</button>
+                </td>
+            </tr>
+            <tr>
+                <td>$3.25</td>
+                <td>$4.15</td>
+                <td>$2.50</td>
+            </tr>
+        </table>
+
+        <h4>Total: <span id="revenue"><!-- Revenue Message will show up here --></span></h4>
+    </div>
+</div>
+
+<script>
+
+    // Set these variables to their DOM elements
+
+    // let coffeeImage = document.querySelector("#coffee-image");
+    // coffeeImage.setAttribute('src', 'static/coffee_beans.jpg');
+    // let revenueMessage;
+
+    // // function showMachine(){
+    //     coffeeImage.setAttribute('src', 'static/coffee_machine.jpg');
+    //     setTimeout(makeCoffee, 1500);
+    // }
+
+    // function makeCoffee(){
+    //     coffeeImage.setAttribute('src', 'static/coffee_mug.jpg');
+    //     setTimeout(showBeans, 2500);
+    // }
+
+    // function showBeans(){
+    //     coffeeImage.setAttribute('src', 'static/coffee_beans.jpg')
+    // }
+
+    
+    // coffeeImage.addEventListener('click', showMachine);
+    
+    // let coffeeImage = $("#coffee-image");
+
+
+    coffeeImage = $('#coffee-image')
+
+    coffeeImage.attr('src', 'static/coffee_beans.jpg');
+
+
+    let drinksOrdered = new Array();
+
+    function makeCoffee(drinkType){
+        
+        coffeeImage.attr('src', 'static/coffee_machine.jpg');
+        coffeeImage.fadeOut(1500);
+        setTimeout(showMug, 1500);
+        drinksOrdered.push(drinkType);
+        console.log(drinksOrdered);
+
+        $("#revenue").html(revenue(drinksOrdered, prices));
+    }
+
+   function showMug(){
+        coffeeImage.fadeIn(500);
+        coffeeImage.attr('src', 'static/coffee_mug.jpg');
+        setTimeout(showBeans, 2500);
+    }
+
+    function showBeans(){
+        coffeeImage.attr('src', 'static/coffee_beans.jpg')
+    } 
+
+    coffeeImage.on('click', function () { makeCoffee('brew'); });
+
+
+
+
+    // use this JavaScript object in further study step
+
+    let espresso = document.querySelector("#espresso");
+    let latte = document.querySelector("#latte");
+    let hotChocolate = document.querySelector("#hot-chocolate");
+
+    const prices = {
+        "brew": 2.05,
+        "espresso": 3.25,
+        "latte": 4.15,
+        "hot chocolate": 2.50
+    };
+
+    espresso.addEventListener('click', function() {makeCoffee('espresso')});
+    latte.addEventListener('click', function() {makeCoffee('latte')});
+    hotChocolate.addEventListener('click', function() { makeCoffee('hot chocolate')});
+
+    let revenueMessage = document.querySelector('#revenue');
+
+    function revenue(drinksOrdered, prices) {
+        let total = 0;
+        for (let k of drinksOrdered) {
+            if (prices[k] != undefined) {
+                total += prices[k];
+            }
+        }
+        return total;
+    }
+
+
+
+
+// function flavorArray1(colors, candyMap) {
+//     let flavors = new Array();
+//     for (let k of colors) {
+//         if (candyMap.has(k)) {
+//             flavors.push(candyMap.get(k));
+//         }
+//         else {
+//             flavors.push(null);
+//         }
+//     }
+//     return flavors;
+// }
+</script>
+
+</body>
+</html>
